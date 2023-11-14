@@ -2,6 +2,7 @@
 session_start();
 include '../config/database.php';
 include 'functions_cashier.php';
+
 $messageError = "";
 
     //Checking if the user click submit
@@ -28,9 +29,11 @@ $messageError = "";
 
                         //Checking password and assigning the session id as user_data id
                             if($user_data['password'] === $password) {
+                                var_dump($user_data['password'], $password); // To check if the dta are correct
                                 $_SESSION['cashier_id'] = $user_data['cashier_id'];
                                 //Checking if user is admin or not 
-                                header("Location: POS.php");
+                                echo "You are logged in";
+                                header("Location: sales.php");
                                 die();
                             }
                             $messageError =  "Wrong password or username";
@@ -38,7 +41,9 @@ $messageError = "";
                     else {
                         $messageError =  "Your username is not associated to any account";
                     }
-             }
+             } else {
+                $messageError = "Error in the SQL query: " . mysqli_error($conn);
+            }
         }
         else {
             $messageError = "Please enter some valid information";
@@ -61,7 +66,7 @@ $messageError = "";
         <div class="left-container-img">
             <img src="../img/Hardware.svg">
         </div>
-        <form method="post">
+        <form method="post"">
             <div class="form-header">
                 <h2>CASHIER LOGIN</h2>
             </div>

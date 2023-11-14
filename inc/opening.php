@@ -21,7 +21,6 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 
-
 </head>
 <body>
   <div class="d-flex" id="wrapper">
@@ -47,7 +46,7 @@ session_start();
               <i class="fa-solid fa-bars primary-text fs-3 me-5 text-warning" id="menu-toggle"></i>
               <div>
                 <h3 class="m-0 text-success fw-bold"><?php echo $pageName;?></h3>
-                <h6 class="fs-6 fw-light" id="date"></h6>
+                <h6 class="fs-6 fw-light " id="date"></h6>
               </div>
           </div>
           <div class="position-absolute end-0 me-5 zindex-dropdown-1">

@@ -83,24 +83,27 @@
                               $query = "SELECT * FROM suppliers";
                               $result = mysqli_query($conn, $query);
                               while ($fetch = mysqli_fetch_array($result)) {
-                                 //Displaying the data in table form
-                                    echo "<tr>";
-                                    echo "<td> {$fetch['supplier_id']}</td>";
-                                    echo "<td> {$fetch['business_name']}</td>";
-                                    echo "<td> {$fetch['contact_number']}</td>";
-                                    echo "<td> {$fetch['email']}</td>";
-                                    echo "<td> {$fetch['total_order']}</td>";
-                                    echo "<td class='action'>
-                                             <button type='button' value='{$fetch['supplier_id']}' class='editSupplierBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editSupplierModal' tabindex='-1' >
-                                                <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
-                                             </button>
-                                             <button type='button' value='{$fetch['supplier_id']}' class='deleteSupplierBtn delete-btn action-btn opacity-btn'>
-                                                <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
-                                             </button>
-                                          </td>";
-                                    echo "</tr>";
-                              }
-                              ?>
+
+                           ?>
+                           <tr>
+                              <!--Displaying the data in table form -->
+                              <td><?php echo $fetch['supplier_id']?></td>
+                              <td><?php echo $fetch['business_name']?></td>
+                              <td><?php echo $fetch['contact_number']?></td>
+                              <td><?php echo $fetch['email']?></td>
+                              <td><?php echo $fetch['total_order']?></td>
+                              <td class='action'>
+                                 <button type='button' value='<?php echo $fetch['supplier_id']?>' class='editSupplierBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editSupplierModal' tabindex='-1' >
+                                    <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
+                                 </button>
+                                 <button type='button' value='<?php echo $fetch['supplier_id']?>' class='deleteSupplierBtn delete-btn action-btn opacity-btn'>
+                                    <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
+                                 </button>
+                              </td>
+                              
+                           </tr>
+                           <?php }?>   
+                              
                         </tbody>
                      </table>
                </div>

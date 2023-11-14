@@ -2,6 +2,7 @@
    $pageName = "Users";
    include './inc/opening.php';
    $messageError  = $passwordError = "";
+   
 ?>
 
    <div class= "container-fluid p-4 d-flex-column" id="main-content">
@@ -88,21 +89,23 @@
                            $query = "SELECT * FROM admins";
                            $result = mysqli_query($conn, $query);
                            while ($fetch = mysqli_fetch_array($result)) {
-                              //Displayng admin's data
-                                 echo "<tr>";
-                                 echo "<td> {$fetch['admin_id']} </td>";
-                                 echo "<td> {$fetch['username']} </td>";
-                                 echo "<td> {$fetch['first_name']} {$fetch['last_name']} </td>";
-                                 echo "<td> {$fetch['email']} </td>";
-                                 echo "<td>
-                                          <button type='button' value='{$fetch['admin_id']}' class='deleteAdminBtn delete-btn action-btn opacity-btn'>
-                                             <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
-                                          </button>
-                                       </td>";
-                                 echo "</tr>";
-                                 
-                           }
+
                            ?>
+                           <tr>
+                              <!-- //Displayng admin's data -->
+                              <td><?php echo $fetch['admin_id']?></td>
+                              <td><?php echo $fetch['username']?></td>
+                              <td><?php echo "{$fetch['first_name']} {$fetch['last_name']}"?></td>
+                              <td><?php echo $fetch['email']?></td>
+
+                              <td>
+                                 <button type='button' value='<?php echo $fetch['admin_id'] ?>' class='deleteAdminBtn delete-btn action-btn opacity-btn'>
+                                    <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
+                                 </button>
+                              </td>
+                           </tr>
+
+                           <?php }?>
                         </tbody>
                      </table>                 
                </div> 
@@ -126,21 +129,23 @@
                            $query = "SELECT * FROM cashiers";
                            $result = mysqli_query($conn, $query);
                            while ($fetch = mysqli_fetch_array($result)) {
-                                 //Displaying cashier's data in table form
-                                 echo "<tr>";
-                                 echo "<td> {$fetch['cashier_id']} </td>";
-                                 echo "<td> {$fetch['username']} </td>";
-                                 echo "<td> {$fetch['first_name']} {$fetch['last_name']} </td>";
-                                 echo "<td> {$fetch['email']} </td>";
-                                 echo "<td>
-                                          <button type='button' value='{$fetch['cashier_id']}' class='deleteCashierBtn delete-btn action-btn opacity-btn'>
-                                             <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
-                                          </button>
-                                       </td>";
-                                 echo "</tr>";
-                                 
-                           }
+
                            ?>
+                                 <!-- Displaying cashier's data in table form -->
+                                 <tr>
+                                 <td> <?php echo $fetch['cashier_id']?></td>
+                                 <td> <?php echo $fetch['username'] ?></td>
+                                 <td> <?php echo $fetch['first_name'] . ' ' . $fetch['last_name'] ?></td>
+                                 <td> <?php echo $fetch['email'] ?></td>
+                                 <td>
+                                    <button type='button' value='<?php echo $fetch['cashier_id'] ?>' class='deleteCashierBtn delete-btn action-btn opacity-btn'>
+                                       <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
+                                    </button>
+                                 </td>
+                                 </tr>
+                                 
+                           <?php } ?>
+                           
                         </tbody>
                      </table>                 
                </div> 

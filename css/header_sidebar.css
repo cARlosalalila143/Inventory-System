@@ -92,7 +92,8 @@ width: 100vw;
     border-top: 7px solid black !important;
     border: 1px solid black;
     overflow-y: scroll !important;
-    font-size: small;
+    font-size: x-small;
+
 }
 
 .action span {

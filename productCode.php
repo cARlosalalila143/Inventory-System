@@ -2,6 +2,7 @@
 include('./config/database.php');
 include('./config/functions.php');
 
+
 // <----------------PHP FOR PRODUCT------------------------------------//
 
 // <________ADDING PRODUCT FORM HANDLER_______________>
@@ -141,8 +142,11 @@ if(isset($_POST['update_product'])){
     }
 }
 
-if(isset($_POST['delete_product']))
-{
+
+
+
+
+if(isset($_POST['delete_product'])){
     $product_id = $_POST['product_id'];
 
     $query = "DELETE FROM products WHERE product_id='$product_id'";
@@ -168,7 +172,75 @@ if(isset($_POST['delete_product']))
     }
 }
 
+if(isset($_POST['searchInput'])) {
+
+   $searchInput = $_POST['searchInput'];
+
+   $query = "SELECT * FROM products WHERE  product_id='$searchInput' OR product LIKE '{$searchInput}%' OR  category LIKE '{$searchInput}%' OR  unit LIKE '{$searchInput}%' OR  price LIKE '{$searchInput}%' OR  quantity LIKE '{$searchInput}%'  OR  supplier LIKE '{$searchInput}%'";
+   $result = mysqli_query($conn, $query);
+        if($result) {
+            if(mysqli_num_rows($result) > 0) {   
+            
+            ?>
+            <table class="table search-table table-warning text-center">
+            <thead class="">
+                <tr>
+                    <th>Code</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Unit</th></th>
+                    <th>Price</th> 
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Supplier</th>
+                    <th>Action</th>
+                </tr> 
+            </thead>    
+            <tbody>
+            
+            <?php
+                while($fetch = mysqli_fetch_assoc($result)) {
+                    $productId = $fetch['product_id'];
+                    $productName = $fetch['product'];
+                    $category = $fetch['category'];
+                    $unit = $fetch['unit'];
+                    $price = $fetch['price'];
+                    $quantity = $fetch['quantity'];
+                    $supplier = $fetch['supplier'];
+                
+            ?>
+                <tr>
+                    <td><?php echo $productId ?></td>
+                    <td><?php echo $productName ?></td>
+                    <td><?php echo $category?></td>
+                    <td><?php echo $unit ?></td>
+                    <td><?php echo $price ?></td>
+                    <td><?php echo $quantity ?></td>
+                    <?php $status = check_stock_status($quantity);?>
+                    <td><?php echo $status?></td>
+                    <td><?php echo $supplier?></td>
+
+                    
+                    <td class='action'>
+                        <button type='button' value='<?php echo $productId?>' class='editProductBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editProductModal' tabindex='-1' >
+                        <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
+                        </button>
+                        <button type='button' value='<?php echo $productId?>' class='deleteProductBtn delete-btn action-btn opacity-btn'>
+                        <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
+                        </button>
+                    </td>
+                </tr>
+            
+                <?php } ?>
+            </tbody>
+
+            </table>
+            <?php
+            }else {
+                echo "<h3 class='text-danger text-center search-table'> Data not found</h3>";
+            }
+}
+
+}
 
 
-
-?>

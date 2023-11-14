@@ -9,7 +9,7 @@
       `category` varchar(100) NOT NULL,
       `unit` varchar(100) NOT NULL,
       `price` int(11) NOT NULL,
-      `quantity` int(11) NOT NULL,
+      `quantity` varchar(100) NOT NULL,
       `status` varchar(100) NOT NULL,
       `supplier` varchar(100) NOT NULL,
       `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -22,7 +22,7 @@
 <!-------------------------------------- Main Page Content-------------------------------- -->
       <div class= "container-fluid p-4 d-flex-column" id="main-content">
                <div class="d-flex justify-content-between">
-                     <input class="search px-3 rounded-4 border-1" type="text" placeholder="Search">
+                  <input class="p-2 w-25" type="search" placeholder="Search" id="search-input" name="search-input" autocomplete="off">
                      <div class="ms-0">
                         <select class="category form-select">
                            <option selected>Select Category</option>
@@ -88,8 +88,9 @@
                      </div>
                </div>
                <!----------PRODUCT TABLE LIST----------->
+
                <div class="table-responsive-md pt-3" id="table">
-                     <table class="table table-warning text-center">
+                     <table class="table table-warning text-center default-table">
                         <thead class="">
                            <tr>
                               <th>Code</th>
@@ -102,35 +103,39 @@
                               <th>Supplier</th>
                               <th>Action</th>
                            </tr> 
-                        </thead>
-                        <tbody>
+                        </thead>                   
+                        <tbody id="product-details">
                            <?php 
                               //Getting the data from database
                               $query = "SELECT * from products";
                               $result = mysqli_query($conn, $query);
                               while ($fetch = mysqli_fetch_array($result)) {
+                           
+                           ?>
 
-                                    echo "<tr>";
-                                    echo "<td> {$fetch['product_id']}</td>";
-                                    echo "<td> {$fetch['product']}</td>";
-                                    echo "<td> {$fetch['category']}</td>";
-                                    echo "<td> {$fetch['unit']}</td>";
-                                    echo "<td> {$fetch['price']}</td>";
-                                    echo "<td> {$fetch['quantity']}</td>";
-                                    $status = check_stock_status($fetch['quantity']);
-                                    echo "<td> {$status}</td>";
-                                    echo "<td> {$fetch['supplier']}</td>";
-                                    echo "<td class='action'>
-                                             <button type='button' value='{$fetch['product_id']}' class='editProductBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editProductModal' tabindex='-1' >
-                                                <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
-                                             </button>
-                                             <button type='button' value='{$fetch['product_id']}' class='deleteProductBtn delete-btn action-btn opacity-btn'>
-                                                <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
-                                             </button>
-                                          </td>";
-                                    echo "</tr>";
-                              }
-                              ?>
+                           <tr >
+                              <td><?php echo $fetch['product_id']?></td>
+                              <td><?php echo $fetch['product']?></td>
+                              <td><?php echo $fetch['category']?></td>
+                              <td><?php echo $fetch['unit']?></td>
+                              <td>&#x20B1; <?php echo $fetch['price']?></td>
+                              <td><?php echo $fetch['quantity']?></td>
+                              <?php $status = check_stock_status($fetch['quantity']);?>
+                              <td><?php echo $status?></td>
+                              <td><?php echo $fetch['supplier']?></td>
+
+                              <td class='action'>
+                                 <button type='button' value='<?php echo $fetch['product_id']?>' class='editProductBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editProductModal' tabindex='-1' >
+                                    <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
+                                 </button>
+                                 <button type='button' value='<?php echo $fetch['product_id']?>' class='deleteProductBtn delete-btn action-btn opacity-btn'>
+                                    <i class='fa-solid fa-trash p-2  bgMaroon text-white'></i>
+                                 </button>
+                              </td>
+                           </tr>
+
+                           <?php } ?>
+
                         </tbody>
                      </table>
                </div>
@@ -303,7 +308,6 @@ $(document).on('click', '.deleteProductBtn', function (e) {
                         'product_id': product_id
                     },
                     success: function (response) {
-
                         var res = jQuery.parseJSON(response);
                         if(res.status == 500) {
 
@@ -316,6 +320,34 @@ $(document).on('click', '.deleteProductBtn', function (e) {
                 });
             }
         });
+
+// Search 
+$(document).ready(function() {
+   $('#search-input').keyup(function() {
+      var searchInput = $(this).val();
+      //alert(searchInput);
+
+      if(searchInput != "") {
+         $('.default-table').hide();
+         $.ajax({
+            url:'productCode.php',
+            method:'POST',
+            data: {
+               'searchInput':searchInput
+            },
+
+            success: function(response) {
+               $('.search-table').remove();
+               $('#table').append(response);
+            }
+         })
+      }else {
+        $('.default-table').show();
+        $('.search-table').remove();
+      }
+   });
+
+});
 
 </script>
 <?php include './inc/closing.php';?>

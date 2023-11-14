@@ -31,5 +31,13 @@ sideMenuLinks.forEach(link => {
 });
 
 //Date
-const date_time = new Date();
+const date = new Date();
+
+const day = date.getDate();
+// getMonth() returns month from 0 to 11
+const monthLists = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let month = monthLists[date.getMonth()]; 
+const year = date.getFullYear();
+
+const date_time = `${month} ${day}, ${year}`;
 document.getElementById("date").innerHTML = date_time;

@@ -20,17 +20,3 @@ function check_login($conn){
 }
 
 
-function check_stock_status($quantity) {
-        //For status; based on the available quantity
-        $status = "";
-        if ($quantity > 20) {
-            $status = "Available";
-        } else if ($quantity >= 1 && $quantity <= 19) {
-            $status = "Available (Low Stock)";
-        } else if ($quantity === 0){
-            $status = "Not available";
-        }
-
-        return $status;
-    
-}
