@@ -29,7 +29,7 @@ if(isset($_POST['new_purchase'])){
               'status' => 200, 
               'message'=> 'New Purchase Order is Successful'
           ];
-  
+
           echo json_encode($response);
           return;
       }
@@ -39,14 +39,14 @@ if(isset($_POST['new_purchase'])){
               'status' => 500, //Error
               'message'=> 'Purchase Order did not added'
           ];
-  
+
           echo json_encode($response);
           return;
       }
     }
 
-    else
-    {
+  else
+  {
         $response = [
             'status' => 422, //Error
             'message'=> 'All purchase order details should be completed'
@@ -54,8 +54,8 @@ if(isset($_POST['new_purchase'])){
 
         echo json_encode($response);
         return;
-    }
   }
+}
 // <________UPDATING PURCHASE FORM HANDLER_______________>
 
 if (isset($_GET['editPurchase'])) {
@@ -93,7 +93,7 @@ if(isset($_POST['update_purchase'])){
     //Checking if all inputs are not empty
     if(!empty($orderNumber) && !empty($productName) && !empty($category) && !empty($quantity)) 
     {
-        
+
         //Inserting to database
         $query = "UPDATE purchases SET order_number ='$orderNumber', product='$productName', category='$category', quantity='$quantity' WHERE purchase_id= '$purchase_id'";
 
@@ -103,9 +103,9 @@ if(isset($_POST['update_purchase'])){
             $response = [
                 'status' => 200, 
                 'message'=> 'Purchases Updated Successfully'
-                
+
             ];
-    
+
             echo json_encode($response);
             return;
         }
@@ -115,7 +115,7 @@ if(isset($_POST['update_purchase'])){
                 'status' => 500, //Error
                 'message'=> 'Update purchase order is not successful'
             ];
-    
+
             echo json_encode($response);
             return;
         }
@@ -170,7 +170,7 @@ if(isset($_POST['searchInput'])) {
    $result = mysqli_query($conn, $query);
         if($result) {
             if(mysqli_num_rows($result) > 0) {   
-            
+
             ?>
             <table class="table search-table table-warning text-center">
             <thead class="">
@@ -185,7 +185,7 @@ if(isset($_POST['searchInput'])) {
                 </tr> 
             </thead>    
             <tbody>
-            
+
             <?php
                 while($fetch = mysqli_fetch_assoc($result)) {
                     $purchaseId = $fetch['purchase_id'];
@@ -194,7 +194,7 @@ if(isset($_POST['searchInput'])) {
                     $category = $fetch['category'];
                     $quantity = $fetch['quantity'];
                     $date_added = $fetch['date_added'];
-                
+
             ?>
                 <tr>
                     <td><?php echo $purchaseId ?></td>
@@ -203,7 +203,7 @@ if(isset($_POST['searchInput'])) {
                     <td><?php echo $category ?></td>
                     <td><?php echo $quantity ?></td>
                     <td><?php echo $date_added ?></td>
-                    
+
                     <td class='action'>
                         <button type='button' value='<?php echo $purchaseId?>' class='editPurchBtn action-btn opacity-btn'  data-bs-toggle='modal' data-bs-target='#editPurchModal' tabindex='-1' >
                         <i class='fa-regular fa-pen-to-square p-2 bgYellow text-white'></i>
@@ -213,7 +213,7 @@ if(isset($_POST['searchInput'])) {
                         </button>
                     </td>
                 </tr>
-            
+
                 <?php } ?>
             </tbody>
 
@@ -225,5 +225,3 @@ if(isset($_POST['searchInput'])) {
 }
 
 }
-
-

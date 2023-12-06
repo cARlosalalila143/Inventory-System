@@ -10,7 +10,7 @@
       `unit` varchar(100) NOT NULL,
       `price` int(11) NOT NULL,
       `quantity` varchar(100) NOT NULL,
-      `status` varchar(100) NOT NULL,
+      `stock_status` varchar(100) NOT NULL,
       `supplier` varchar(100) NOT NULL,
       `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
       PRIMARY KEY (product_id) 
@@ -22,7 +22,7 @@
 <!-------------------------------------- Main Page Content-------------------------------- -->
       <div class= "container-fluid p-4 d-flex-column" id="main-content">
                <div class="d-flex justify-content-between">
-                  <input class="p-2 w-25" type="search" placeholder="Search" id="search-input" name="search-input" autocomplete="off">
+                  <input class="p-2 w-25 form-control border-outline-dark" type="search" placeholder="Search" id="search-input" name="search-input" autocomplete="off">
                      <div class="ms-0">
                         <select class="category form-select">
                            <option selected>Select Category</option>
@@ -89,9 +89,9 @@
                </div>
                <!----------PRODUCT TABLE LIST----------->
 
-               <div class="table-responsive-md pt-3" id="table">
-                     <table class="table table-warning text-center default-table">
-                        <thead class="">
+               <div class="mt-3" id="table">
+                     <table class="table table-warning table-hover text-center default-table">
+                        <thead class="table-dark">
                            <tr>
                               <th>Code</th>
                               <th>Product</th>
@@ -120,8 +120,8 @@
                               <td><?php echo $fetch['unit']?></td>
                               <td>&#x20B1; <?php echo $fetch['price']?></td>
                               <td><?php echo $fetch['quantity']?></td>
-                              <?php $status = check_stock_status($fetch['quantity']);?>
-                              <td><?php echo $status?></td>
+                              <?php $stock_status = check_stock_status($fetch['quantity']);?>
+                              <td><?php echo $stock_status?></td>
                               <td><?php echo $fetch['supplier']?></td>
 
                               <td class='action'>
@@ -240,6 +240,7 @@
         data: { editProduct: true, product_id: product_id }, // Send 'editProduct' parameter
         success: function(response) {
             var res = jQuery.parseJSON(response);
+            console.log(res);
             if (res.status == 404) {
                 alert(res.message);
             } else if (res.status == 200) {
@@ -272,8 +273,8 @@
         processData: false,
         contentType: false,
         success: function(response) {
-            console.log(response);
             var res = jQuery.parseJSON(response);
+            console.log(response);
             if (res.status == 422) {
                 // Show error message inside the modal
                 $('#errorMessage_update').removeClass('d-none');

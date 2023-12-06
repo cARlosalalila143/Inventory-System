@@ -1,7 +1,6 @@
 <?php 
    $pageName = "Dashboard";
    include './inc/opening.php';
-   
 ?>
 
 <?php 

@@ -99,7 +99,7 @@
                               $query = "SELECT * from purchases";
                               $result = mysqli_query($conn, $query);
                               while ($fetch = mysqli_fetch_array($result)) {
-                           
+
                            ?>
 
                            <tr >
@@ -224,7 +224,7 @@ $(document).on('click', '#new-purchase', function(e) {
                 alert(res.message);
             } else if (res.status == 200) {
                 // Data added successfully, close the modal and reset the form
-                
+
                 $('#purchase_id').val(res.data.purchase_id);
                 $('#order-number').val(res.data.order_number);
                 $('#product-name').val(res.data.product);

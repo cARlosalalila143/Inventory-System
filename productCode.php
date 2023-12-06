@@ -23,10 +23,10 @@ if(isset($_POST['add_product'])){
     //Checking if all inputs are not empty
     if(!empty($productName) && !empty($category) && !empty($unit) && !empty($price) && !empty($quantity) && !empty($supplier)) 
     {
-        $status = check_stock_status(intval($quantity));
+        $stock_status = check_stock_status(intval($quantity));
 
         //Inserting to database
-        $query = "INSERT INTO `products`(`product`, `category`, `unit`, `price`, `quantity`, `status`, `supplier`) VALUES ('$productName','$category','$unit','$price','$quantity','$status','$supplier')";
+        $query = "INSERT INTO `products`(`product`, `category`, `unit`, `price`, `quantity`, `stock_status`, `supplier`) VALUES ('$productName','$category','$unit','$price','$quantity','$stock_status','$supplier')";
 
         if (mysqli_query($conn, $query)) 
         {
@@ -102,10 +102,10 @@ if(isset($_POST['update_product'])){
     //Checking if all inputs are not empty
     if(!empty($productName) && !empty($category) && !empty($unit) && !empty($price) && !empty($quantity) && !empty($supplier)) 
     {
-        $status = check_stock_status(intval($quantity));
+        $stock_status = check_stock_status(intval($quantity));
 
         //Inserting to database
-        $query = "UPDATE products SET product='$productName',category='$category', unit='$unit', price='$price',quantity='$quantity', status='$status', supplier='$supplier' WHERE product_id= '$product_id'";
+        $query = "UPDATE products SET product='$productName',category='$category', unit='$unit', price='$price',quantity='$quantity', stock_status='$stock_status', supplier='$supplier' WHERE product_id= '$product_id'";
 
         if (mysqli_query($conn, $query)) 
         {
@@ -176,7 +176,7 @@ if(isset($_POST['searchInput'])) {
 
    $searchInput = $_POST['searchInput'];
 
-   $query = "SELECT * FROM products WHERE  product_id='$searchInput' OR product LIKE '{$searchInput}%' OR  category LIKE '{$searchInput}%' OR  unit LIKE '{$searchInput}%' OR  price LIKE '{$searchInput}%' OR  quantity LIKE '{$searchInput}%'  OR  supplier LIKE '{$searchInput}%'";
+   $query = "SELECT * FROM products WHERE  product_id='$searchInput' OR product LIKE '%{$searchInput}%' OR  category LIKE '%{$searchInput}%' OR  unit LIKE '%{$searchInput}%' OR  price LIKE '%{$searchInput}%' OR  quantity LIKE '%{$searchInput}%'  OR  supplier LIKE '%{$searchInput}%' OR  stock_status LIKE '%{$searchInput}%'";
    $result = mysqli_query($conn, $query);
         if($result) {
             if(mysqli_num_rows($result) > 0) {   
@@ -239,7 +239,9 @@ if(isset($_POST['searchInput'])) {
             }else {
                 echo "<h3 class='text-danger text-center search-table'> Data not found</h3>";
             }
+        
 }
+
 
 }
 

@@ -65,8 +65,8 @@
                      </div>
                </div>
                <!----------SUPPLIER TABLE LIST----------->
-               <div class="table-responsive-md pt-3" >
-                     <table class="table table-warning text-center" id="table">
+               <div class="table-responsive-md pt-3" id="table">
+                     <table class="table table-warning text-center">
                         <thead class="">
                            <tr>
                               <th>Supplier Id</th>

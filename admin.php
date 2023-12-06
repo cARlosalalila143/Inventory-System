@@ -24,6 +24,8 @@ if (mysqli_num_rows($tableCheckResult) == 0) {
     mysqli_query($conn, $createQuery);
 }
 
+
+
 // Check if the admin data already exists
 $usernameCheck = "SELECT * FROM admins WHERE username = 'admin'";
 $result = mysqli_query($conn, $usernameCheck);
@@ -33,6 +35,40 @@ if (mysqli_num_rows($result) == 0) {
     $insertQuery = "INSERT INTO admins (`username`, `first_name`, `last_name`, `email`, `password`) VALUES ('admin', 'john', 'doe', 'jd@gmail.com',  '1234')";
     mysqli_query($conn, $insertQuery);
 }
+
+// Check if the table exists
+$tableCheckQuery = "SHOW TABLES LIKE 'cashiers'";
+$tableCheckResult = mysqli_query($conn, $tableCheckQuery);
+
+if (mysqli_num_rows($tableCheckResult) == 0) {
+    // The table does not exist, create it
+    $createQuery = "CREATE TABLE `cashiers` (
+        `cashier_id` int(11) NOT NULL AUTO_INCREMENT,
+        `username` varchar(100) NOT NULL,
+        `first_name` varchar(100) NOT NULL,
+        `last_name` varchar(100) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        `password` varchar(100) NOT NULL,
+        `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        PRIMARY KEY (`cashier_id`) 
+    )";
+    
+    mysqli_query($conn, $createQuery);
+}
+
+
+
+// Check if the cashier data already exists
+$usernameCheck = "SELECT * FROM cashiers";
+$result = mysqli_query($conn, $usernameCheck);
+
+if (mysqli_num_rows($result) == 0) {
+    // The admin data does not exist, insert it
+    $insertQuery = "INSERT INTO cashiers (`username`, `first_name`, `last_name`, `email`, `password`) VALUES ('cashier', 'Jamie', 'Doe', 'jamied@gmail.com',  '123')";
+    mysqli_query($conn, $insertQuery);
+}
+
+
 
     //Checking if the user click submit
     if($_SERVER['REQUEST_METHOD'] == "POST") {

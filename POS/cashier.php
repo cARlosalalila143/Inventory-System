@@ -66,7 +66,7 @@ $messageError = "";
         <div class="left-container-img">
             <img src="../img/Hardware.svg">
         </div>
-        <form method="post"">
+        <form method="post">
             <div class="form-header">
                 <h2>CASHIER LOGIN</h2>
             </div>

@@ -6,7 +6,7 @@ function check_login($conn){
         $user_id = $_SESSION['admin_id'];
 
         //Creating a query fpr checking if the current user id match any user_id in the database
-        $query = "SELECT * FROM admins where admin_id= '$user_id' limit 1";
+        $query = "SELECT * FROM admins WHERE admin_id= '$user_id' LIMIT 1";
         $result= mysqli_query($conn, $query);
 
         if ($result && mysqli_num_rows($result) > 0){

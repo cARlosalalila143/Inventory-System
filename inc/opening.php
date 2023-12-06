@@ -31,7 +31,7 @@ session_start();
         <a href="dashboard.php" class="list-group-item bg-success text-white ms-3 mb-4  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-gauge"></i>Dashboard</a>
         <a href="product.php" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-gift"></i>Products</a>
         <a href="supplier.php" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-truck-field"></i>Supplier</a>
-        <a href="purchase.php" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-cart-shopping"></i>Purchases</a>
+        <a href="purchases.php" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-cart-shopping"></i>Purchases</a>
         <a href="sales.html" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 bi bi-card-checklist"></i>Sales</a>
         <a href="reports.html" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-solid fa-arrow-trend-up"></i>Reports</a>
         <a href="users.php" class="list-group-item bg-success text-white ms-3 mb-2  border border-end-0 rounded-2 rounded-end-0"><i class="me-3 fa-regular fa-user"></i>Users</a>
