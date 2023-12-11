@@ -26,7 +26,7 @@ function check_stock_status($quantity) {
         if ($quantity > 20) {
             $status = "Available";
         } else if ($quantity >= 1 && $quantity <= 19) {
-            $status = "Low Stock";
+            $status = "Available(Low Stock)";
         } else if ($quantity == 0){
             $status = "Not available";
         }

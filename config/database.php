@@ -2,8 +2,8 @@
 
 //Defining constant to the database to access it.
 define("DB_HOST", "localhost");
-define("DB_USER", "admin");
-define("DB_PASS", "1234");
+define("DB_USER", "root");
+define("DB_PASS", "");
 define("DB_NAME", "inventory");
 
 //Creating connection to the database
